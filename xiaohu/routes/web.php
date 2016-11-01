@@ -153,6 +153,23 @@ Route::any('api/comment/remove', function(){
 
 Route::any('api/timeline', 'CommonController@timeline');
 
+Route::get('tpl/page/home', function(){
+	return view('pages.home');
+});
+
+Route::get('tpl/page/signup', function(){
+	return view('pages.signup');
+});
+
+Route::get('tpl/page/login', function(){
+	return view('pages.login');
+});
+
+
+Route::get('tpl/page/question_add', function(){
+	return view('pages.hoquestion_addme');
+});
+
 
 
 

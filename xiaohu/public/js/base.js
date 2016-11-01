@@ -18,15 +18,15 @@
 		$stateProvider
 			.state('home', {
 				url: '/home',
-				templateUrl: 'home.tpl'
+				templateUrl: '/tpl/page/home'
 			})
 			.state('login', {
 				url: '/login',
-				templateUrl: 'login.tpl'
+				templateUrl: '/tpl/page/login'
 			})
 			.state('signup', {
 				url: '/signup',
-				templateUrl: 'signup.tpl'
+				templateUrl: '/tpl/page/signup'
 			})
 			.state('question', {
 				abstract: true,
@@ -35,7 +35,7 @@
 			})
 			.state('question.add', {
 				url: '/add',
-				templateUrl: 'question.add.tpl'
+				templateUrl: '/tpl/page/question_add'
 			})
 	}])
 
