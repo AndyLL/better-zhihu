@@ -106,6 +106,10 @@ class Answer extends Model{
 
    		return suc('success!');
    	}
+    
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 
    	public function users(){
    		return $this
@@ -113,6 +117,8 @@ class Answer extends Model{
    			->withPivot('vote')
    			->withTimestamps();
 	}
+
+
 }
 
 

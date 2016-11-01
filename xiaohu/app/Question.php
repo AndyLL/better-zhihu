@@ -86,6 +86,10 @@ class Question extends Model{
    			suc('Success!') : 
     		err('DB delete failed.');
 	}
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
 
 

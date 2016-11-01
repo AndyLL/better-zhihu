@@ -11,12 +11,15 @@ class CommonController extends Controller{
     	list($limit, $skip) = paginate(rq('page'), rq('limit'));
 
     	$questions = question_ins()
+            ->with('user')
     		->limit($limit)
     		->skip($skip)
     		->orderBy('created_at', 'desc')
     		->get();
 
     	$answers = answer_ins()
+            ->with('user')
+            ->with('users')
     		->limit($limit)
     		->skip($skip)
     		->orderBy('created_at', 'desc')
@@ -32,6 +35,6 @@ class CommonController extends Controller{
 
     	$data = $data->values()->all();
 
-    	return suc('data' => $data);
+    	return suc($data);
     }
 }

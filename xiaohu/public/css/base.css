@@ -54,7 +54,7 @@ body{
 }
 .center-container{
 	margin: auto;
-	width: 980px;
+	max-width: 980px;
 }
 .highlight{
 	width: auto;
@@ -118,8 +118,9 @@ body{
 	float:right;
 	width: 90%;
 }
-
-
+.tac{
+	text-align: center;
+}
 
 
 

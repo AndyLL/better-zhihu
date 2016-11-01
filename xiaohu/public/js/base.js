@@ -1,9 +1,9 @@
 ;(function(){
 	'use strict';
 	
-	angular.module('xiaohu', ['ui.router'])
+	var app = angular.module('xiaohu', ['ui.router'])
 	
-	.config([
+	app.config([
 			'$interpolateProvider',
 			'$stateProvider',
 			'$urlRouterProvider',
@@ -39,7 +39,7 @@
 			})
 	}])
 
-	.service('UserService', [
+	app.service('UserService', [
 		'$state',
 		'$http',
 		function($state, $http){
@@ -84,7 +84,7 @@
 		}
 	}])
 
-	.controller('SignupController', [
+	app.controller('SignupController', [
 		'$scope',
 		'UserService',
 		function($scope, UserService){
@@ -98,7 +98,7 @@
 			}, true)
 	}])
 
-	.controller('LoginController', [
+	app.controller('LoginController', [
 		'$scope',
 		'UserService',
 		function($scope, UserService){
@@ -106,7 +106,7 @@
 		}
 	])
 
-	.service('QuestionService', [
+	app.service('QuestionService', [
 		'$http',
 		'$state',
 		function($http, $state){
@@ -133,7 +133,7 @@
 		}
 	])
 
-	.controller('QuestionAddController', [
+	app.controller('QuestionAddController', [
 		'$scope',
 		'QuestionService',
 		function($scope, QuestionService){
@@ -141,32 +141,55 @@
 		}
 	])
 
-	.service('TimelineService', [
-		'http',
+	app.service('TimelineService', [
+		'$http',
 		function($http){
 			var me = this
 			me.data = []
-			me.get() = function(conf){
+			me.current_page = 1;
+
+			me.get = function(conf){
+				if(me.pending) return 
+
+				me.pending = true
+				conf = conf || {page: me.current_page}
+
 				$http.post('api/timeline', conf)
 					.then(function(r){
-						if(r.data.status)
-							me.data = me.data.concat(r.data.data)
+						if(r.data.status){
+							if(r.data.data.length){
+								me.data = me.data.concat(r.data.data)
+								me.current_page++
+							}
+							else
+								me.no_more_data = true
+						}
 						else 
 							cosole.error('network error')
 					}, function(){
 						console.error('network error')
 					})
+					.finally(function(){
+						me.pending = false
+					})
 			}
 		}
 	])
 
-
-	.controller('HomeController', [
+	app.controller('HomeController', [
 		'$scope',
 		'TimelineService',
 		function($scope, TimelineService){
+			var $win
 			$scope.Timeline = TimelineService
 			TimelineService.get()
+			$win = $(window)
+
+			$win.on('scroll', function(){
+				if(($(document).height() - $win.scrollTop() - $win.height() < 30)){
+					TimelineService.get()
+				} 
+			})
 		}
 	])
 
