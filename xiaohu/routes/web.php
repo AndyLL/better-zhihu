@@ -167,7 +167,7 @@ Route::get('tpl/page/login', function(){
 
 
 Route::get('tpl/page/question_add', function(){
-	return view('pages.hoquestion_addme');
+	return view('pages.question_add');
 });
 
 

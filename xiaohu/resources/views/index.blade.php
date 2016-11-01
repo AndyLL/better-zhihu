@@ -11,6 +11,9 @@
 	<script src="/node_modules/angular/angular.js"></script>
 	<script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="/js/base.js"></script>
+	<script src="/js/common.js"></script>
+	<script src="/js/user.js"></script>
+	<script src="/js/question_add.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
