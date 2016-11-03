@@ -16,7 +16,7 @@
 	<script src="/js/question_add.js"></script>
 	<script src="/js/answer.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
 </head>
 
 <body>
@@ -42,18 +42,18 @@
 	      	<ul class="right hide-on-med-and-down">
 		        <li><a href="" ui-sref="home">Home</a></li>
 		        @if(is_logged_in())
-		        <li><a href="" ui-sref="signup">{{session('username')}}</a></li>
+		        <li><a ui-sref="signup">{{session('username')}}</a></li>
 		        <li><a href="{{url('api/logout')}}">Logout</a></li>
 		        @else
-		        <li><a href="" ui-sref="signup">Signup</a></li>
-		        <li><a href="" ui-sref="login">Login</a></li>
+		        <li><a ui-sref="signup">Signup</a></li>
+		        <li><a ui-sref="login">Login</a></li>
 		        @endif
 	     	</ul>
 
 	      	<ul class="side-nav" id="mobile-demo">
-		        <li><a href="" ui-sref="home">Home</a></li>
-		        <li><a href="" ui-sref="signup">Signup</a></li>
-		        <li><a href="" ui-sref="login">Login</a></li>
+		        <li><a ui-sref="home">Home</a></li>
+		        <li><a hui-sref="signup">Signup</a></li>
+		        <li><a ui-sref="login">Login</a></li>
 	      	</ul>
 	    </div>
   	</nav>

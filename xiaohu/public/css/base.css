@@ -3,7 +3,7 @@
 }
 html{
 	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	height: 100%;
 }
 nav{
@@ -32,6 +32,12 @@ nav .input-field label i{
 }
 nav .material-icons{
 	color:white !important;
+}
+.side-nav{
+	background-color: rgba(0,0,0,0.75) !important;
+}
+.side-nav a:hover{
+	background-color: rgba(0,0,0,0.95);
 }
 .input-field input[type=search]{
 	width: 300px;
@@ -139,7 +145,7 @@ body{
 	width:90%;
 }
 .item .item-content .question-title{
-	
+
 }
 .item .item-content .title{
 	font-size: 20px;
@@ -161,6 +167,12 @@ body{
 }
 .item .item-content .action-set .comment{
 
+}
+.item .item-content .content-main a{
+	color:black;
+}
+.item .item-content .content-main a:hover{
+	color:#039be5;
 }
 .conmment-block{
 	display: none;

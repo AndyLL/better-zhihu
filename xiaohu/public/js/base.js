@@ -49,7 +49,7 @@
 				templateUrl: '/tpl/page/question_add'
 			})
 			.state('question.detail', {
-				url: '/detail/:id',
+				url: '/detail/:id?answer_id',
 				templateUrl: '/tpl/page/question_detail'
 			})
 			.state('user', {
