@@ -62,7 +62,7 @@ class Answer extends Model{
         if(!$user)
             return err('user does not exist');
 
-        $r =  $this
+        $r = $this
                 ->with('question')
                 ->where('user_id', $user_id)
                 ->get()
@@ -84,6 +84,7 @@ class Answer extends Model{
         }
 
    		if(rq('id')){
+   			// 查看单个问题回答
    			$answer = $this
                 ->with('user')
                 ->with('users')
@@ -92,20 +93,39 @@ class Answer extends Model{
    			if(!$answer)
    				return err('answer does not exist');
 
+   			$answer = $this->count_vote($answer);
+
    			return ['status' => 1, 'data' => $answer];
    		}
 
+   		// chech if question exists
    		if(!question_ins()->find(rq('question_id')))
-   			return err('answer does not exist');
+   			return err('question does not exist');
 
-   		$answer = $this
+   		$answers = $this
         ->with('user')
         ->with('users')
    			->where('question_id', rq('question_id'))
    			->get()
    			->keyBy('id');
 
-   		return suc([$answer]);
+   		return ['status' => 1, 'data' => $answers];
+   	}
+
+   	public function count_vote($answer){
+   		$upvote_count = 0;
+   		$downvote_count = 0;
+   		foreach($answer->users as $user){
+   			if($user->pivot->vote == 1)
+				$upvote_count++;
+			else
+				$downvote_count++;
+   		}
+
+   		$answer->upvote_count = $upvote_count;
+   		$answer->downvote_count = $downvote_count;
+
+   		return $answer;
    	}
 
    	public function vote(){
@@ -126,6 +146,7 @@ class Answer extends Model{
         if($vote != 1 && $vote !=2 && $vote !=3)
             return err('invalid vote');
 
+        // check if user has voted, if so delete the vote
    		$answer->users()
    			->newPivotStatement()
    			->where('user_id', session('user_id'))

@@ -18,6 +18,7 @@ class CommonController extends Controller{
     		->get();
 
     	$answers = answer_ins()
+            ->with('question')
             ->with('user')
             ->with('users')
     		->limit($limit)

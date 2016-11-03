@@ -10,10 +10,11 @@
 			var me = this
 			me.data = []
 			me.current_page = 1;
+			me.no_more_data = false
 
 			// 获取首页数据
 			me.get = function(conf){
-				if(me.pending) return 
+				if(me.pending || me.no_more_data) return 
 
 				me.pending = true
 				conf = conf || {page: me.current_page}
@@ -48,6 +49,12 @@
 							AnswerService.update_data(conf.id)
 					})
 			}
+
+			me.reset_state = function(){
+				me.data = []
+				me.current_page = 1
+				me.no_more_data = false
+			}
 		}
 	])
 
@@ -58,6 +65,7 @@
 		function($scope, TimelineService, AnswerService){
 			var $win
 			$scope.Timeline = TimelineService
+			TimelineService.reset_state()
 			TimelineService.get()
 			$win = $(window)
 

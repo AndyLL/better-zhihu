@@ -63,8 +63,13 @@ class Question extends Model{
     }
 
    	public function read(){
-   		if(rq('id'))
-   			return suc(['data' => $this->find(rq('id'))]);
+   		if(rq('id')){
+            $r = $this
+                ->with('answers_with_user_info')
+                ->find(rq('id'));
+            return ['status' => 1, 'data' => $r];
+        }
+		
 
         if(rq('user_id')){
             $user_id = rq('user_id') == 'self' ? session('user_id') : rq('user_id'); 
@@ -81,7 +86,7 @@ class Question extends Model{
    					->get(['id', 'title', 'desc', 'user_id', 'created_at', 'updated_at'])
    					->keyBy('id');
 
-   		return suc(['data' => $r]);
+   		return ['status' => 1, 'data' => $r];
    	}
 
    	public function remove(){
@@ -107,7 +112,19 @@ class Question extends Model{
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function answers(){
+        return $this->hasMany('App\Answer');
+    }
+
+    public function answers_with_user_info(){
+        return $this
+                ->answers()
+                ->with('user')
+                ->with('users');
+    }
 }
+
 
 
 

@@ -174,6 +174,9 @@ Route::get('tpl/page/user', function(){
 	return view('pages.user');
 });
 
+Route::get('tpl/page/question_detail', function(){
+	return view('pages.question_detail');
+});
 
 
 

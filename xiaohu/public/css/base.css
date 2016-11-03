@@ -138,6 +138,9 @@ body{
 	float: right;
 	width:90%;
 }
+.item .item-content .question-title{
+	
+}
 .item .item-content .title{
 	font-size: 20px;
 }
