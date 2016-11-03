@@ -49,10 +49,27 @@ class Question extends Model{
     		err('DB insert failed');
    	}
 
+    public function read_by_user_id($user_id){
+        $user = user_ins()->find($user_id);
+        
+        if(!$user)
+            return err('user does not exist');
+
+        $r =  $this->where('user_id', $user_id)
+                   ->get()
+                   ->keyBy('id');
+
+        return suc($r->toArray());
+    }
+
    	public function read(){
    		if(rq('id'))
    			return suc(['data' => $this->find(rq('id'))]);
 
+        if(rq('user_id')){
+            $user_id = rq('user_id') == 'self' ? session('user_id') : rq('user_id'); 
+            return $this->read_by_user_id($user_id);
+        }
    		//$limit = rq('limit') ? : 15;
    		// $skip = ((rq('page') ? : 1) - 1)* $limit;
 

@@ -56,9 +56,32 @@ class Answer extends Model{
     		err('DB update failed.');
     }
 
+    public function read_by_user_id($user_id){
+        $user = user_ins()->find($user_id);
+        
+        if(!$user)
+            return err('user does not exist');
+
+        $r =  $this
+                ->with('question')
+                ->where('user_id', $user_id)
+                ->get()
+                ->keyBy('id');
+
+        return suc($r->toArray());
+    }
+
     public function read(){
-    	if(!rq('id') && !rq('question_id'))
+    	if(!rq('id') && !rq('question_id') && !rq('user_id'))
     		return err('ID and question_id are required.');
+
+        if(rq('user_id')){
+            $user_id = rq('user_id') === 'self' ? 
+                session('user_id') : 
+                rq('user_id');       
+
+            return $this->read_by_user_id($user_id);
+        }
 
    		if(rq('id')){
    			$answer = $this
@@ -130,7 +153,9 @@ class Answer extends Model{
    			->withTimestamps();
 	}
 
-
+    public function question(){
+        return $this->belongsTo('App\Question');
+    }
 }
 
 

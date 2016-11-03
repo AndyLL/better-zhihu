@@ -2,6 +2,8 @@
 	box-sizing: border-box;
 }
 html{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
 	height: 100%;
 }
 nav{
@@ -67,7 +69,10 @@ body{
 }
 .card{
 	background: rgba(255,255,255,0.9) !important;
-	padding: 20px;
+	padding:20px;
+}
+.margin-top{
+	margin-top:20px !important;
 }
 .center-container{
 	margin: auto;
@@ -176,11 +181,45 @@ body{
 .tac{
 	text-align: center;
 }
-
-
-
-
-
+.info-item>:first-child{
+	width: 20%;
+	float: left;
+}
+.info-item>:last-child{
+	width: 80%;
+	float: left;
+}
+.replied-item>:first-child{
+	/*-webkit-box-shadow:inset 0px 0px px 1px #f00;
+    -moz-box-shadow:inset 0px 0px 0px 1px #f00;
+    box-shadow:inset 0px 0px 0px 1px #f00;*/
+    box-shadow: 
+        inset 0px 11px 8px -10px #CCC,
+        inset 0px 0px 0px 0px #000; 
+}
+.replied-item>:last-child{
+	background: white;
+}
+.float-left{
+	float: left;
+}
+.float-right{
+	float:right;
+}
+.collapsible-title{
+	font-size: 18px;
+	color:black;
+}
+footer{
+	background: rgba(255,255,255,0.9) !important;
+}
+footer a{
+	color:black !important;
+}
+footer.page-footer .footer-copyright{
+	color: black;
+	font-weight: bold;
+}
 
 
 

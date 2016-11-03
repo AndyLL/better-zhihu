@@ -42,10 +42,10 @@ function err($msg = null){
 	return ['sataus' => 0, 'msg' => $msg];
 }
 
-function suc($data_to_merge = []){
+function suc($data_to_add = []){
 	$data = ['status' => 1, 'data' => []];
-	if($data_to_merge)
-		$data['data'] = array_merge($data['data'], $data_to_merge);
+	if($data_to_add)
+		$data['data'] = $data_to_add;
 
 	return $data;
 }
@@ -168,6 +168,10 @@ Route::get('tpl/page/login', function(){
 
 Route::get('tpl/page/question_add', function(){
 	return view('pages.question_add');
+});
+
+Route::get('tpl/page/user', function(){
+	return view('pages.user');
 });
 
 
