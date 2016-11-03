@@ -1,11 +1,16 @@
 ;(function(){
-	'use strict';
-	
+	'use strict'
+
+	window.his = {
+		id: parseInt($('html').attr('user-id'))
+	}
+
 	var app = angular.module('xiaohu', [
 			'ui.router',
 			'common',
+			'answer',
 			'user',
-			'question'
+			'question'			
 			])
 	
 	app.config([

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="xiaohu">
+<html lang="en" ng-app="xiaohu" user-id="{{session('user_id')}}">
 <head>
 	<meta charset="UTF-8">
 	<title>xiaohu</title>
@@ -14,13 +14,14 @@
 	<script src="/js/common.js"></script>
 	<script src="/js/user.js"></script>
 	<script src="/js/question_add.js"></script>
+	<script src="/js/answer.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
 	<nav class="transparent">
 	    <div class="nav-wrapper">
-	      	<a href="" class="brand-logo" ui-sref="home">Logo</a>
+	      	<a href="" class="brand-logo" ui-sref="home"></a>
 	      	<a href="#" data-activates="mobile-demo" class="button-collapse">
 	      		<i class="material-icons">menu</i>
 	      	</a>
@@ -75,7 +76,14 @@
 	<script>
 		$(".button-collapse").sideNav();
 		$("#search_close").click(function(){
-			$("#search").val("").focus();
+			console.log("sa")
+			$(".input-field input[type=search]").val("").focus()
+		})
+		$(".input-field input[type=search]").focus(function(){
+			$("#search_close").css('display', 'block')
+		})
+		$(".input-field input[type=search]").blur(function(){
+			$("#search_close").css('display', 'none')
 		})
 	</script>
 </body>

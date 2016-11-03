@@ -52,31 +52,37 @@ class Answer extends Model{
    		$answer->content = rq('content');
 
    		return $answer->save() ?
-   			suc('Success!') : 
+   			suc(['Success!']) : 
     		err('DB update failed.');
     }
 
     public function read(){
     	if(!rq('id') && !rq('question_id'))
-    		return suc('ID and question_id are required.');
+    		return err('ID and question_id are required.');
 
    		if(rq('id')){
-   			$answer = $this->find(rq('id'));
+   			$answer = $this
+                ->with('user')
+                ->with('users')
+                ->find(rq('id'));
+
    			if(!$answer)
    				return err('answer does not exist');
 
-   			return suc('data', $answer);
+   			return ['status' => 1, 'data' => $answer];
    		}
 
    		if(!question_ins()->find(rq('question_id')))
    			return err('answer does not exist');
 
    		$answer = $this
+        ->with('user')
+        ->with('users')
    			->where('question_id', rq('question_id'))
    			->get()
    			->keyBy('id');
 
-   		return suc(['data' => $answer]);
+   		return suc([$answer]);
    	}
 
    	public function vote(){
@@ -92,7 +98,10 @@ class Answer extends Model{
    		if(!$answer)
    			return err('Answer doesnt exist.');
 
-   		$vote = rq('vote') <= 1 ? 1 : 2;
+        // 1: support, 2: against, 3: clear vote
+   		$vote = rq('vote');
+        if($vote != 1 && $vote !=2 && $vote !=3)
+            return err('invalid vote');
 
    		$answer->users()
    			->newPivotStatement()
@@ -100,11 +109,14 @@ class Answer extends Model{
    			->where('answer_id', rq('id'))
    			->delete();
 
+        if($vote == 3)
+            return ['status' => 1];
+
    		$answer
    			->users()
    			->attach(session('user_id'), ['vote' => $vote]);
 
-   		return suc('success!');
+   		return suc(['success!']);
    	}
     
     public function user(){
