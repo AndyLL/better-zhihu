@@ -47,7 +47,7 @@ nav .material-icons{
 body{
 	background: url('../images/background.jpg') no-repeat fixed;
 	background-position: center;
-	background-size:  1440px 780px;
+	background-size: cover;
 	color:black;
 	min-height: 1vh;
 }
