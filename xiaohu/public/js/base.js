@@ -58,6 +58,13 @@
 			})
 	}])
 
+	.controller('BaseController', [
+		'$scope',
+		function($scope){
+			$scope.his = his
+		}
+	])
+
 	/* root scope */
 	// .controller('TestController', function($scope){
 	// 	$scope.name = 'Bob'
