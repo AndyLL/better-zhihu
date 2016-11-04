@@ -9,6 +9,7 @@
 		function($http, $state){
 			var me = this
 			me.data = {}
+			me.answer_form = {}
 
 			/*统计票数
 			 * @answers array 用于统计投票的数据
@@ -100,6 +101,18 @@
 						}
 						return false
 					})
+			}
+
+			me.add_or_update = function(question_id){
+				if(!question_id){
+					console.error('question_id is required')
+					return
+				}
+				me.answer_form.question_id = question_id
+				if(me.answer_form.id)
+					$http.post('/api/answer/change', me.answer_form)
+				else
+					$http.post('/api/answer/add', me.answer_form)
 			}
 		}
 	])
