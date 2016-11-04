@@ -1,5 +1,9 @@
 <!doctype html>
-<html lang="en" ng-app="xiaohu" user-id="{{session('user_id')}}">
+<html lang="en" 
+		ng-app="xiaohu" 
+		user-id="{{session('user_id')}}"
+		ng-controller="BaseController"
+	>
 <head>
 	<meta charset="UTF-8">
 	<title>xiaohu</title>
