@@ -85,15 +85,17 @@
 		'$scope',
 		'QuestionService',
 		function($scope, QuestionService){
-			//$scope.Question = QuestionService
+			$scope.Question = QuestionService
 		}
 	])
 
 	app.controller('QuestionDetailController',[
 		'$scope',
 		'$stateParams',
+		'AnswerService',
 		'QuestionService',
-		function($scope, $stateParams, QuestionService){
+		function($scope, $stateParams, AnswerService, QuestionService){
+		$scope.Answer = AnswerService
 			QuestionService.read($stateParams)
 			if($stateParams.answer_id)
 				QuestionService.current_answer_id = $stateParams.answer_id
