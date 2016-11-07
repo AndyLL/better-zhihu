@@ -4,11 +4,13 @@
 		<div class="hr"></div>
 		<div> [: Question.current_question.desc:]</div>
 
-		<div class="hr"></div>
+		<div ng-if="Question.current_question.desc" class="hr"></div>
 		<div class="tac">
 			<h6>[: Question.current_question.answers_with_user_info.length :] replies in totle.</h6>
 		</div>
 	</div>
+
+	<!-- <span ng-click="item.show_comment">Comment</span> -->
 
 	<div class="card margin-top answer-block">
 		<div ng-if="!Question.current_answer_id || Question.current_answer_id == item.id" 
@@ -27,14 +29,27 @@
 
 			<div class="float-left answer-content">
 				<a ui-sref="user({id: item.user.id})">[:item.user.username:] </a>
-				<i ng-if="item.user_id == his.id" 
-					ng-click="Answer.answer_form = item"
-					class="material-icons edit-icon">mode_edit</i>
+				<span ng-if="item.user_id == his.id">
+					<i ng-click="Answer.answer_form = item"
+						class="material-icons action-icon">mode_edit</i>
+					<i ng-click="Answer.delete(item.id)"
+						class="material-icons action-icon">delete</i>
+				</span>
+				<span ng-if="item.user_id != his.id">
+					<i ng-click="item.show_comment = !item.show_comment"
+						class="material-icons action-icon">reply</i>
+				</span>
+
 				<div> [:item.content:] </div>
 				<div class="updated_time"> [:item.updated_at:] </div>
 			</div>
 
-			
+			<div ng-if="item.show_comment" 
+				comment-block 
+				class="reply-comment" 
+				answer-id="item.id">
+				
+			</div>
 
 			<div class="hr"></div>
 		</div>
