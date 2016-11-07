@@ -111,11 +111,97 @@
 				me.answer_form.question_id = question_id
 				if(me.answer_form.id)
 					$http.post('/api/answer/change', me.answer_form)
+						.then(function(r){
+							if(r.data.status){
+								me.answer_form = {}
+								$state.reload()
+								console.log('1')
+								return	
+							}
+						})
 				else
 					$http.post('/api/answer/add', me.answer_form)
+						.then(function(r){
+							if(r.data.status){
+								me.answer_form = {}
+								$state.reload()
+								console.log('1')
+								return	
+							}
+						})
+			}
+
+			me.delete = function(id){
+				if(!id){
+					cnosole.log('id is required')
+					return 
+				}
+
+				$http.post('api/answer/remove', {id: id})
+					.then(function(r){
+						if(r.data.status){
+							console.log('1')
+							$state.reload()
+							return
+						}
+					})
+			}
+
+			me.add_comment = function(){
+				return $http.post('api/comment/add', me.new_comment)
+							.then(function(r){
+								if(r.data.status)
+									return true
+								return false
+						})
 			}
 		}
 	])
+
+	.directive('commentBlock', [
+		'$http',
+		'AnswerService',
+		'$state',
+		function($http, AnswerService, $state){
+			var o = {}
+			o.templateUrl = 'comment.tpl' 
+
+			o.scope = {
+				answer_id: '=answerId',
+			}
+
+			o.link = function(sco, ele, attr){ //ele = $(this)
+				sco.Answer = AnswerService
+				sco._ = {}
+				sco.data = {}
+				sco.helper = helper
+
+				function get_comment_list(){
+					return $http.post('/api/comment/read', {answer_id: sco.answer_id})
+						.then(function(r){
+							if(r.data.status)
+								sco.data = angular.merge({}, sco.data, r.data.data)
+						})
+				}
+				//ele.on('click', function(){
+					//console.log(sco.answer_id + "asd")
+				if(sco.answer_id)
+					get_comment_list()
+				//})
+
+				sco._.add_comment = function(){
+					AnswerService.new_comment.answer_id = sco.answer_id
+					AnswerService.add_comment()
+						.then(function(r){
+							if(r){
+								AnswerService.new_comment = {}
+								get_comment_list()
+							}
+						})
+				}
+			}
+			return o
+	}])
 })();
 
 
