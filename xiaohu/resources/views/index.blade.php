@@ -17,7 +17,7 @@
 	<script src="/js/base.js"></script>
 	<script src="/js/common.js"></script>
 	<script src="/js/user.js"></script>
-	<script src="/js/question_add.js"></script>
+	<script src="/js/question.js"></script>
 	<script src="/js/answer.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesheet">
@@ -100,6 +100,30 @@
 		</div>
 	</footer>
 
+	<script type="text/ng-template" id="comment.tpl">
+		<div class="conmment-block">
+			<div class="hr"></div>
+			<div class="comment-item-set">
+				<div ng-if="!helper.obj_length(data)" class="tac"> No comment.</div>
+				<div ng-if="helper.obj_length(data)" 
+					ng-repeat="item in data" class="comment-item clear-float">
+					<div class="user">[: item.user.username :]</div>
+					<div class="comment-content"> [: item.content :] </div>
+				</div>
+			</div> 
+		</div> 
+
+		<form ng-submit="_.add_comment()" class="col s12 comment-form">
+	      	<div class="row">
+	        	<div class="input-field col s12">
+		          	<textarea ng-model="Answer.new_comment.content" id="textarea1" class="materialize-textarea"></textarea>
+		          	<label for="textarea1">Reply</label>
+	        	</div>
+	        	<button class="float-right btn waves-effect waves-light light-blue darken-1" type="submit">
+	        		Reply<i class="material-icons right">send</i></button>
+	      	</div>
+	    </form>
+	</script>
 
 	<script>
 		$(".button-collapse").sideNav();
