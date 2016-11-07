@@ -39,7 +39,7 @@ function paginate($page = 1, $limit = 15){
 }
 
 function err($msg = null){
-	return ['sataus' => 0, 'msg' => $msg];
+	return ['status' => 0, 'msg' => $msg];
 }
 
 function suc($data_to_add = []){
