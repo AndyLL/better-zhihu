@@ -32,17 +32,20 @@
 					</div>
 
 					<div class="action-set">
-						<div class="comment">Comment</div>
+						<div ng-click="item.show_comment = !item.show_comment" class="comment">Comment 
+							<i ng-if="item.show_comment" class="material-icons">arrow_drop_up</i>
+							<i ng-if="!item.show_comment" class="material-icons">arrow_drop_down</i>
+						</div>
 					</div>
 
-					<div class="conmment-block">
+					<div ng-if="item.show_comment" class="conmment-block">
 						<div class="hr"></div>
 						<div class="comment-item-set">
 							<div class="comment-item clear-float">
-								<div class="user">simulife</div>
-								<div class="comment-content"> 微软能革自己的命是因为windows是微软一家的平台，微软革了命，微软掌握着平台和用户，开发者就得跟着屁股跑在后头，还有人骂微软折腾苦逼开发者呢。html/css/js是web app的基础吧，google想革就能把整个世界都革了么，google只是其中有影响力的一员，没有平台和用户绑架其他跟他竞争的开发者的...google自己推出了Dart，，都要兼容js，微软也有TypeScript。开发者跟了多少...呵呵。 </div>
+								<div class="user">[: item.user.username :]</div>
+								<div class="comment-content"> [: item.content :] </div>
 							</div>
-							<div class="comment-item clear-float">
+							<!-- <div class="comment-item clear-float">
 								<div class="user">Ivony</div>
 								<div class="comment-content"> 我认为Google应当和各个厂商合作积极推进Web技术的发展，而不是出于自己的目的积极推进标准化。可以说其实所谓的Web标准化目前在阻碍用户体验的提升，用个不恰当的例子，Web技术需要一次跨越性的发展，就像转基因技术一样，虽然会有公众的不理解和风险，但在这个上面的投入可以得到非常大的回报大大改善人类的生活质量。而传统的杂交育种技术，虽然有广泛的群众基础和较为容易被接受，却已经是穷途末路，能够带来的产量提升长远来看非常有限。 </div>
 							</div>
@@ -57,7 +60,7 @@
 									Windows明显很差？如果真的很差为什么还有这么多人用？你以为用户和软件商都是傻子？你要说Win32 API很丑陋也算有道理，但那是历史余孽，显然微软是愿意革自己的命的，微软在2000年就推出了.NET代替原有的Windows API，现在XAML更是部署到了所有的平台。
 									
 									而Google呢？我只能说不能革自己命的公司迟早被别人革命。 </div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
