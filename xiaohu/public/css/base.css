@@ -168,14 +168,24 @@ body{
 .item .item-content .action-set .comment{
 
 }
+.item .item-content .action-set .material-icons{
+	font-size: 18px;
+	vertical-align: middle;;
+}
 .item .item-content .content-main a{
 	color:black;
 }
 .item .item-content .content-main a:hover{
 	color:#039be5;
 }
+.item .reply-comment{
+	display: block;
+	width: 90%;
+	float:right;
+}
 .conmment-block{
-	display: none;
+	display: block;
+	overflow: hidden;
 }
 .comment-item-set{
 	/*border:1px solod #eee;*/
@@ -192,6 +202,9 @@ body{
 .comment-item .comment-content{
 	float:right;
 	width: 90%;
+}
+.comment-form {
+	overflow: hidden;
 }
 .tac{
 	text-align: center;
@@ -244,13 +257,13 @@ footer.page-footer .footer-copyright{
 .item .answer-content .updated_time{
 	color:grey;
 }
-.edit-icon{
+.action-icon{
 	font-size: 16px !important;
 	color:#bdbdbd;
 	position: relative;
-    top: 4px;
+    top: 3px;
 }
-.edit-icon:hover{
+.action-icon:hover{
 	color:black;
 	cursor: pointer;
 }
