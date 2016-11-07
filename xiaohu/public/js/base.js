@@ -5,6 +5,12 @@
 		id: parseInt($('html').attr('user-id'))
 	}
 
+	window.helper = {}
+
+	helper.obj_length = function(obj){
+				return Object.keys(obj).length
+			}
+
 	var app = angular.module('xiaohu', [
 			'ui.router',
 			'common',
@@ -62,6 +68,11 @@
 		'$scope',
 		function($scope){
 			$scope.his = his
+			$scope.helper = helper
+			
+			// $scope.helper.obj_length = function(obj){
+			// 	return Object.keys(obj).length
+			// }
 		}
 	])
 
