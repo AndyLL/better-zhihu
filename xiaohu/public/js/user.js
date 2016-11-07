@@ -48,6 +48,22 @@
 					}
 			}
 
+			me.logout = function(){
+				$http.post('api/logout', me.login_data)
+					.then(function(r){
+						if(r.data.status){
+							console.log('yse')
+							location.href = '/'
+						}
+						else{
+							console.log('no')
+							location.href = '/'
+						}
+					}), function(){
+						console.log('???')
+					}
+			}
+
 			me.read = function(param){
 				return $http.post('/api/user/read', param)
 					.then(function(r){
