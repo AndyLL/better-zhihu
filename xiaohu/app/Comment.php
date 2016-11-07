@@ -46,7 +46,7 @@ class Comment extends Model{
     	$this->user_id = session('user_id');
 
     	return $this->save() ?
-   			suc(['id' => $this->id]) : 
+   			['status' => 1, 'id' => $this->id] : 
     		err('DB insert failed.');
    	}
 
@@ -55,12 +55,12 @@ class Comment extends Model{
    			return err('question_id or answer_id required.');   
 
    		if(rq('question_id')){
-   			$question = question_ins()->find(rq('question_id'));
+   			$question = question_ins()->with('user')->find(rq('question_id'));
 
    			if(!$question)
    				return err('Question doesnt exist.');  
 
-   			$data = $this->where('question_id', rq('question_id'))->get();
+   			$data = $this->with('user')->where('question_id', rq('question_id'))->get();
    		}
    		else{
 			$answer = answer_ins()->find(rq('answer_id'));
@@ -68,12 +68,12 @@ class Comment extends Model{
    			if(!$answer)
    				return err('Answer doesnt exist.');  
    			
-   			$data = $this->where('answer_id', rq('answer_id'));
+   			$data = $this->with('user')->where('answer_id', rq('answer_id'));
    		}
 
    		$data = $data->get()->keyBy('id');
 
-   		return suc(['data' => $data]); 
+   		return ['status' => 1, 'data'=> $data]; 
    	} 
 
    	public function remove(){
@@ -93,9 +93,13 @@ class Comment extends Model{
    		$this->where('reply_to', rq('id'))->delete();
 
    		return $comment->delete() ?
-   			suc('Delete success!') : 
+   			['status' => 1, 'data' => 'Delete success!'] : 
     		err('DB delete failed.');
    	}
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
 
 
